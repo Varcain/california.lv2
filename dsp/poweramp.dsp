@@ -25,6 +25,6 @@ with {
 
     // Negative feedback with Presence control
     // Higher presence → lower LP cutoff → less HF in feedback → brighter output
-    nfb(pres) = fi.lowpass(1, nfb_fc(pres)) : *(-0.15);
-    nfb_fc(pres) = 3500.0 * pow(500.0 / 3500.0, pres);
+    nfb(pres) = fi.lowpass(1, nfb_fc(pres)) : *(-0.4);
+    nfb_fc(pres) = 5000.0 * pow(300.0 / 5000.0, pres);
 };

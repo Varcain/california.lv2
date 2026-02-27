@@ -29,14 +29,14 @@ with {
 
     // --- Gain Stages (per Dual Rectifier topology) ---
     //   Stage | Coupling fc | Bypass fc | Boost | Channels
-    //   1     | 7.2 Hz      | 156 Hz    | +10dB | All
-    //   2     | 7.2 Hz      | 156 Hz    | +10dB | All
-    //   3     | 15.9 Hz     | 200 Hz    | +8dB  | Vintage, Modern
-    //   4     | 31.8 Hz     | 250 Hz    | +6dB  | Modern only
-    stage1(drv, sag) = gs.gainstage(drv, sag, 7.2,  156, 10);
-    stage2(drv, sag) = gs.gainstage(drv, sag, 7.2,  156, 10);
-    stage3(drv, sag) = gs.gainstage(drv, sag, 15.9, 200, 8);
-    stage4(drv, sag) = gs.gainstage(drv, sag, 31.8, 250, 6);
+    //   1     | 7.2 Hz      | 156 Hz    | +6dB  | All
+    //   2     | 7.2 Hz      | 156 Hz    | +6dB  | All
+    //   3     | 15.9 Hz     | 200 Hz    | +4dB  | Vintage, Modern
+    //   4     | 31.8 Hz     | 250 Hz    | +3dB  | Modern only
+    stage1(drv, sag) = gs.gainstage(drv, sag, 7.2,  156, 6);
+    stage2(drv, sag) = gs.gainstage(drv, sag, 7.2,  156, 6);
+    stage3(drv, sag) = gs.gainstage(drv, sag, 15.9, 200, 4);
+    stage4(drv, sag) = gs.gainstage(drv, sag, 31.8, 250, 3);
 
     // Channel switching: Clean=2 stages, Vintage=3, Modern=4
     // Each optional stage is always computed (FAUST evaluates all paths)
@@ -53,7 +53,7 @@ with {
     amp_chain(x) = x :
         preamp(drive, sag, channel) :
         ts.dual_rect_tonestack(treble, mid, bass) :
-        *(ba.db2linear(40)) :  // post-tonestack recovery gain (V4 stage, compensates passive FMV tonestack loss)
+        *(ba.db2linear(20)) :  // post-tonestack recovery gain (V4 stage, compensates passive FMV tonestack loss)
         pa.poweramp(master_drive, presence, sag) :
         *(output_level)
     with {
