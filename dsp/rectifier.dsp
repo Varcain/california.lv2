@@ -19,7 +19,7 @@ with {
 
 sag_envelope(mode, x) = sag_factor
 with {
-    tube_sag  = 1.0 - 0.30 * min(1.0, ar_envelope(0.001, 0.020, x));
+    tube_sag  = 1.0 - 0.30 * min(1.0, ar_envelope(0.005, 0.020, x));
     diode_sag = 1.0 - 0.02 * min(1.0, ar_envelope(0.001, 0.001, x));
     sag_factor = select2(mode, tube_sag, diode_sag);
 };

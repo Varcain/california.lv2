@@ -1,0 +1,146 @@
+@prefix doap:  <http://usefulinc.com/ns/doap#> .
+@prefix foaf:  <http://xmlns.com/foaf/0.1/> .
+@prefix lv2:   <http://lv2plug.in/ns/lv2core#> .
+@prefix ui:    <http://lv2plug.in/ns/extensions/ui#> .
+@prefix epp:   <http://lv2plug.in/ns/ext/port-props#> .
+@prefix atom:  <http://lv2plug.in/ns/ext/atom#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix units: <http://lv2plug.in/ns/extensions/units#> .
+@prefix urid:  <http://lv2plug.in/ns/ext/urid#> .
+<https://faustlv2.bitbucket.io/california>
+       a lv2:Plugin ;
+       doap:name "California" ;
+       lv2:binary <california.so> ;
+       lv2:requiredFeature urid:map ;
+       lv2:optionalFeature epp:supportsStrictBounds ;
+       lv2:optionalFeature lv2:hardRTCapable ;
+       rdfs:comment "Mesa Boogie Dual Rectifier Simulation" ;
+       doap:revision "1.0" ;
+       doap:license "GPL" ;
+    lv2:port [
+	a lv2:InputPort ;
+	a lv2:ControlPort ;
+	lv2:index 0 ;
+	lv2:symbol "Gain_0" ;
+	lv2:name "Gain" ;
+        lv2:portProperty epp:hasStrictBounds ;
+        epp:rangeSteps 100 ;
+	lv2:default 0.5 ;
+	lv2:minimum 0 ;
+	lv2:maximum 1 ;
+    ] , [
+	a lv2:InputPort ;
+	a lv2:ControlPort ;
+	lv2:index 1 ;
+	lv2:symbol "Bass_1" ;
+	lv2:name "Bass" ;
+        lv2:portProperty epp:hasStrictBounds ;
+        epp:rangeSteps 100 ;
+	lv2:default 0.5 ;
+	lv2:minimum 0 ;
+	lv2:maximum 1 ;
+    ] , [
+	a lv2:InputPort ;
+	a lv2:ControlPort ;
+	lv2:index 2 ;
+	lv2:symbol "Mid_2" ;
+	lv2:name "Mid" ;
+        lv2:portProperty epp:hasStrictBounds ;
+        epp:rangeSteps 100 ;
+	lv2:default 0.5 ;
+	lv2:minimum 0 ;
+	lv2:maximum 1 ;
+    ] , [
+	a lv2:InputPort ;
+	a lv2:ControlPort ;
+	lv2:index 3 ;
+	lv2:symbol "Treble_3" ;
+	lv2:name "Treble" ;
+        lv2:portProperty epp:hasStrictBounds ;
+        epp:rangeSteps 100 ;
+	lv2:default 0.5 ;
+	lv2:minimum 0 ;
+	lv2:maximum 1 ;
+    ] , [
+	a lv2:InputPort ;
+	a lv2:ControlPort ;
+	lv2:index 4 ;
+	lv2:symbol "Presence_4" ;
+	lv2:name "Presence" ;
+        lv2:portProperty epp:hasStrictBounds ;
+        epp:rangeSteps 100 ;
+	lv2:default 0.5 ;
+	lv2:minimum 0 ;
+	lv2:maximum 1 ;
+    ] , [
+	a lv2:InputPort ;
+	a lv2:ControlPort ;
+	lv2:index 5 ;
+	lv2:symbol "Master_5" ;
+	lv2:name "Master" ;
+        lv2:portProperty epp:hasStrictBounds ;
+        epp:rangeSteps 100 ;
+	lv2:default 0.5 ;
+	lv2:minimum 0 ;
+	lv2:maximum 1 ;
+    ] , [
+	a lv2:InputPort ;
+	a lv2:ControlPort ;
+	lv2:index 6 ;
+	lv2:symbol "Channel_6" ;
+	lv2:name "Channel" ;
+        lv2:portProperty epp:hasStrictBounds ;
+        epp:rangeSteps 2 ;
+	lv2:default 0 ;
+	lv2:minimum 0 ;
+	lv2:maximum 2 ;
+	lv2:portProperty lv2:enumeration ;
+	lv2:portProperty lv2:integer ;
+	lv2:scalePoint [ rdfs:label "Clean"; rdf:value 0 ] ;
+	lv2:scalePoint [ rdfs:label "Vintage"; rdf:value 1 ] ;
+	lv2:scalePoint [ rdfs:label "Modern"; rdf:value 2 ] ;
+    ] , [
+	a lv2:InputPort ;
+	a lv2:ControlPort ;
+	lv2:index 7 ;
+	lv2:symbol "Rectifier_7" ;
+	lv2:name "Rectifier" ;
+        lv2:portProperty epp:hasStrictBounds ;
+        epp:rangeSteps 1 ;
+	lv2:default 0 ;
+	lv2:minimum 0 ;
+	lv2:maximum 1 ;
+	lv2:portProperty lv2:enumeration ;
+	lv2:portProperty lv2:integer ;
+	lv2:scalePoint [ rdfs:label "Tube"; rdf:value 0 ] ;
+	lv2:scalePoint [ rdfs:label "Diode"; rdf:value 1 ] ;
+    ] , [
+	a lv2:InputPort ;
+	a lv2:ControlPort ;
+	lv2:index 8 ;
+	lv2:symbol "Output_8" ;
+	lv2:name "Output" ;
+        lv2:portProperty epp:hasStrictBounds ;
+        epp:rangeSteps 400 ;
+	lv2:default -12 ;
+	lv2:minimum -40 ;
+	lv2:maximum 0 ;
+	lv2:scalePoint [ rdfs:label "-40dB"; rdf:value -40 ] ;
+	lv2:scalePoint [ rdfs:label "-20dB"; rdf:value -20 ] ;
+	lv2:scalePoint [ rdfs:label "-12dB"; rdf:value -12 ] ;
+	lv2:scalePoint [ rdfs:label "0dB"; rdf:value 0 ] ;
+    ] , [
+	a lv2:InputPort ;
+	a lv2:AudioPort ;
+	lv2:index 9 ;
+	lv2:symbol "in0" ;
+	lv2:name "in0" ;
+    ] , [
+	a lv2:OutputPort ;
+	a lv2:AudioPort ;
+	lv2:index 10 ;
+	lv2:symbol "out0" ;
+	lv2:name "out0" ;
+    ]
+.

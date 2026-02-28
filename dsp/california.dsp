@@ -53,10 +53,10 @@ with {
     amp_chain(x) = x :
         preamp(drive, sag, channel) :
         ts.dual_rect_tonestack(treble, mid, bass) :
-        *(ba.db2linear(20)) :  // post-tonestack recovery gain (V4 stage, compensates passive FMV tonestack loss)
+        *(ba.db2linear(22)) :  // post-tonestack recovery gain (V4 stage, compensates passive FMV tonestack loss)
         pa.poweramp(master_drive, presence, sag) :
         *(output_level)
     with {
-        sag = rect.sag_envelope(rect_mode, x);
+        sag = rect.sag_envelope(rect_mode, x * drive);
     };
 };

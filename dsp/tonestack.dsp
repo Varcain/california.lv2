@@ -9,8 +9,8 @@ with {
     R1 = 250e3;   // Treble pot
     R2 = 1e6;     // Bass pot (1M — key Dual Rectifier value)
     R3 = 25e3;    // Mid pot
-    R4 = 100e3;   // Fixed resistor
+    R4 = 33e3;    // Fixed resistor (Dual Rectifier schematic)
     C1 = 250e-12; // 250pF
-    C2 = 100e-9;  // 100nF
-    C3 = 47e-9;   // 47nF
+    C2 = 22e-9;   // 22nF (was 100nF — Mesa Mark series value)
+    C3 = 22e-9;   // 22nF (was 47nF — Mesa Mark series value)
 };

@@ -14,13 +14,15 @@ with {
     // Output transformer inverts one phase so both halves add constructively
     push_pull_6l6(sag) = (tube6l6(sag), tube6l6_neg(sag)) :> _;
     soft_clip(x) = x * (1.0 + 0.2 * x) / (1.0 + abs(0.8 * x));
-    tube6l6(sag, x) = sag * soft_clip(x);
-    tube6l6_neg(sag, x) = 0 - sag * soft_clip(x);
+    // Class AB crossover: 33% gain reduction at zero, negligible above |x|>0.5
+    crossover(x) = x * (x * x + 0.01) / (x * x + 0.015);
+    tube6l6(sag, x) = sag * soft_clip(crossover(x));
+    tube6l6_neg(sag, x) = 0 - sag * soft_clip(crossover(x));
 
-    // Output transformer: 2nd-order bandpass (70Hz–7kHz) + soft core saturation
-    output_transformer = fi.highpass(2, 70) : fi.lowpass(2, 7000) : xfmr_sat
+    // Output transformer: 2nd-order bandpass (70Hz–12kHz) + soft core saturation
+    output_transformer = fi.highpass(2, 70) : fi.lowpass(2, 12000) : xfmr_sat
     with {
-        xfmr_sat(x) = ma.tanh(x * 0.8) * 1.25;
+        xfmr_sat(x) = ma.tanh(x * 0.5) * 2.0;
     };
 
     // Negative feedback with Presence control
