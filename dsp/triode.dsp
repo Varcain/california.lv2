@@ -13,10 +13,10 @@ with {
 
     koren_sat(x) = ma.tanh(gain * (raw - dc))
     with {
-        knee = 4.0;      // softplus sharpness (Kp-derived)
-        offset = 0.05;   // ~1/mu bias shift
+        knee = 1.5;      // softplus sharpness (Kp-derived, lower = wider transition)
+        offset = 0.1;    // ~1/mu bias shift (asymmetry source)
         ex = 1.4;        // Koren plate current exponent
-        gain = 2.0;      // drive into output saturation
+        gain = 0.7;      // drive into output saturation (lower = softer clipping)
 
         softplus(z) = log(1.0 + exp(min(z, 20.0)));  // clamp prevents exp overflow
         e1 = softplus(knee * (x + offset));

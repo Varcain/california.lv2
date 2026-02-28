@@ -9,7 +9,7 @@ coldclipper(mix) = _ <: (_, (*(pregain) : clip_core : *(postgain))) : crossfade(
 with {
     hi = 0.8;
     lo = -0.4;
-    pregain = 1.5;              // push signal into clipping range
+    pregain = 1.0;              // push signal into clipping range
     postgain = 1.0 / hi;       // normalize max positive output to ~1.0
 
     crossfade(m, dry, wet) = dry * (1.0 - m) + wet * m;
