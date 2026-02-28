@@ -8,6 +8,7 @@ gs   = library("gainstage.dsp");
 ts   = library("tonestack.dsp");
 pa   = library("poweramp.dsp");
 rect = library("rectifier.dsp");
+cc   = library("coldclipper.dsp");
 
 process = amp_chain
 with {
@@ -49,9 +50,13 @@ with {
         optional_stage(stage3(drv, sag), 0, ch) :
         optional_stage(stage4(drv, sag), 1, ch);
 
+    // Per-channel cold clipper mix: Clean=bypass, Vintage=partial, Modern=full
+    clipper_mix = select2(channel > 0, 0.0, select2(channel > 1, 0.6, 1.0));
+
     // --- Full Signal Chain ---
     amp_chain(x) = x :
         preamp(drive, sag, channel) :
+        cc.coldclipper(clipper_mix) :
         ts.dual_rect_tonestack(treble, mid, bass) :
         *(ba.db2linear(22)) :  // post-tonestack recovery gain (V4 stage, compensates passive FMV tonestack loss)
         pa.poweramp(master_drive, presence, sag) :

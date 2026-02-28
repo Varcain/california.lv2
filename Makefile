@@ -14,7 +14,7 @@ INSTALL_DIR = $(HOME)/.lv2
 
 all: $(BUNDLE)
 
-$(BUNDLE): dsp/california.dsp dsp/triode.dsp dsp/gainstage.dsp dsp/tonestack.dsp dsp/poweramp.dsp dsp/rectifier.dsp
+$(BUNDLE): dsp/california.dsp dsp/triode.dsp dsp/gainstage.dsp dsp/tonestack.dsp dsp/poweramp.dsp dsp/rectifier.dsp dsp/coldclipper.dsp
 	$(FAUST2LV2) $(FAUST_FLAGS) $(DSP)
 
 install: $(BUNDLE)
